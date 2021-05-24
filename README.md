@@ -5,7 +5,7 @@
 파산이 된 플레이어가 나온다면 게임이 종료됩니다. 
 
 # 플로우 차트
-![bluemarblescreenshot](https://user-images.githubusercontent.com/61133793/119252199-df1c2280-bbe5-11eb-8f9e-b4a61e75d280.PNG)
+![bluemarblescreenshot](https://user-images.githubusercontent.com/61133793/119252199-df1c2280-bbe5-11eb-8f9e-b4a61e75d280.PNG){: width="100" height="100"}
 
 # 사용된 프로그램 정보
 - JDK 1.8 
@@ -17,7 +17,9 @@
 - Login class 에서 프로젝트를 실행 시키면 인원 수를 띄우는 메시지 창이 나옵니다. 
 ![bluemarblescreenshot](https://user-images.githubusercontent.com/61133793/119252199-df1c2280-bbe5-11eb-8f9e-b4a61e75d280.PNG)
 - 
+
 ## 특수지역
+
 - 총 4군데의 특수지역이 있고 해당 특수 지역에 도착했을 시 다양한 메시지 창이 발생 합니다.
 <pre><code>
 switch (player.playerState) {
@@ -37,10 +39,6 @@ switch (player.playerState) {
 					message = "월급을 받습니다!";
 					player.plusMoney(10);
 				}			
-				if (position == 3) {
-					message = "황금올리브";
-					num = (int) ((Math.random() * 6) + 1);						
-				}
 				if (position == 6) {
 					message = "무인도에 갇혔습니다ㅠㅠ \n다음턴은 쉽니다";
 					player.playerState = 0;
@@ -53,7 +51,6 @@ switch (player.playerState) {
 					message = "병원 도착! 건강검진을 받으세요! \n(비용 20만원)";
 					player.minusMoney(20);
 				}
-
 				JOptionPane.showMessageDialog(null, message); </code></pre>
 
 ### 무인도 (6번째 칸)에 갇혔을 시 해당 메시지 창이 발생 합니다.
@@ -97,6 +94,16 @@ switch (players[turn].playerState) {
 ## 최종 순위
         
 # 어려웠던 점
+- 좌표값 설정
+땅에 대한 정보가 필요했습니다. 마우스 포인터의 위치를 통해 X값과 Y값을 알아냈고,
+
+- 게임말 이동 
+처음 설계는 게임말이 해당 위치에 곧바로 나오게 했습니다. 
+
+- 보유 금액 갱신
+각 플레이어의 금액이 제대로 갱신되지 않고 마지막 플레이어 라벨에만 금액이 변경되었습니다. 두번 형변환 포인트 컴포넌트로 문제 해결
+</pre></code> zz </code></pre>
+
 
 # 앞으로 개선 해야할 것
 
