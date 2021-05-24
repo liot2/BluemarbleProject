@@ -95,7 +95,7 @@
 ![18번째칸](https://user-images.githubusercontent.com/61133793/119318403-3a1c4b00-bcb4-11eb-9c3c-7381439c9e93.PNG)
 ## 통행료 두배
 ![통행료2배](https://user-images.githubusercontent.com/61133793/119317944-ae0a2380-bcb3-11eb-9ee9-8ca29f702ae0.PNG)
-<pre><code> if (Tile.tileList[position].getOwner().equals(player)) { // 자신의 땅이니?
+<pre><code> if (Tile.tileList[position].getOwner().equals(player)) { 
 				message = "자신의 땅에 돌아왔습니다! 통행료가 2배가 됩니다!";
 				Tile.tileList[position].toll = Tile.tileList[position].toll * 2;
 				JOptionPane.showMessageDialog(null, message);
