@@ -23,8 +23,7 @@
 ## 특수지역
 
 - 총 4군데의 특수 지역이 있으며 해당 특수 지역에 도착했을 때, 지역에 맞는 메시지 창이 발생 합니다.
-<pre><code>
-switch (player.playerState) {
+<pre><code>switch (player.playerState) {
 		case 0: {
 			break;
 		}
@@ -61,8 +60,7 @@ switch (player.playerState) {
  ![무인도에 갇힘](https://user-images.githubusercontent.com/61133793/119319793-d561f000-bcb5-11eb-9f99-858009bcf872.PNG)
  ![이번판 쉼](https://user-images.githubusercontent.com/61133793/119319832-dd219480-bcb5-11eb-858c-8ff55dc6fdc3.PNG)
 - playerstate가 0일때 무인도, 1일때 게임 가능을 기준으로 두었습니다.
-<pre><code> 
-switch (players[turn].playerState) {
+<pre><code>switch (players[turn].playerState) {
 			case 0: {
 				JOptionPane.showMessageDialog(dice, "무인도에 갇혔으므로 이번턴은 쉽니다!");
 				players[turn].playerState = 1;
@@ -85,31 +83,24 @@ switch (players[turn].playerState) {
 
 					playerSet(turn);
 					turn = ++turn % 4;
-
+		
 					repaint();
 
 					diceStatus = PAUSE;
 					break;
 				} </code></pre>
-##  (12번째 칸)에 도착했을 시 해당 메시지 창이 발생 합니다.
+## 복권 (12번째 칸)에 도착했을 시 해당 메시지 창이 발생 합니다.
 ![12번째](https://user-images.githubusercontent.com/61133793/119318252-080ae900-bcb4-11eb-8776-305c690000bf.PNG)
-<pre><code>
-</code></pre>
 ## 병원 (18번째 칸)에 도착했을 시 해당 메시지 창이 발생 합니다.
 ![18번째칸](https://user-images.githubusercontent.com/61133793/119318403-3a1c4b00-bcb4-11eb-9c3c-7381439c9e93.PNG)
-
-## 통행료 2배
+## 통행료 두배
 ![통행료2배](https://user-images.githubusercontent.com/61133793/119317944-ae0a2380-bcb3-11eb-9ee9-8ca29f702ae0.PNG)
-<pre><code>if (Tile.tileList[position].getOwner().equals(player)) { // 자신의 땅이니?
+<pre><code> if (Tile.tileList[position].getOwner().equals(player)) { // 자신의 땅이니?
 				message = "자신의 땅에 돌아왔습니다! 통행료가 2배가 됩니다!";
 				Tile.tileList[position].toll = Tile.tileList[position].toll * 2;
 				JOptionPane.showMessageDialog(null, message);
 			} </code></pre>
-## 자금 부족
-![돈업승ㅁ](https://user-images.githubusercontent.com/61133793/119317900-9a5ebd00-bcb3-11eb-88db-f60ceddfcde2.PNG)
-<pre><code> if (players[i].getMoney() < Tile.tileList[position].toll) {
-					JOptionPane.showMessageDialog(null, "돈이 부족해서 땅을 구매할 수 없습니다!"); </code></pre>
-
+- 본인 소유 토지를 다시 밟을 때, 통행료를 두배 낼수 있게 했습니다. 
 ## 파산과 최종 순위
 ![파산](https://user-images.githubusercontent.com/61133793/119318008-c0845d00-bcb3-11eb-918d-00caacc5b48a.PNG)
 ![최종 순위](https://user-images.githubusercontent.com/61133793/119318034-c8dc9800-bcb3-11eb-83b1-18af9b7950f2.PNG)
@@ -133,8 +124,12 @@ switch (players[turn].playerState) {
 				System.exit(1);
 			}
 		}
-	}
-</code></pre>
+	}</code></pre>
+## 자금 부족
+![돈업승ㅁ](https://user-images.githubusercontent.com/61133793/119317900-9a5ebd00-bcb3-11eb-88db-f60ceddfcde2.PNG)
+<pre><code> if (players[i].getMoney() < Tile.tileList[position].toll) {
+					JOptionPane.showMessageDialog(null, "돈이 부족해서 땅을 구매할 수 없습니다!"); 
+					} </code></pre>
         
 # 어려웠던 점
 - 좌표값 설정
