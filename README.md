@@ -5,7 +5,7 @@
 파산이 된 플레이어가 나온다면 게임이 종료됩니다. 
 
 # 플로우 차트
-![bluemarblescreenshot](https://user-images.githubusercontent.com/61133793/119252199-df1c2280-bbe5-11eb-8f9e-b4a61e75d280.PNG){: width="100" height="100"}
+![bluemarblescreenshot](https://user-images.githubusercontent.com/61133793/119252199-df1c2280-bbe5-11eb-8f9e-b4a61e75d280.PNG)
 
 # 사용된 프로그램 정보
 - JDK 1.8 
@@ -31,10 +31,10 @@ switch (player.playerState) {
 			int position = (player.getPosition() + num) % 24;
 			player.setPosition(player.getPosition() + num);
 
-			players[i].moveTo(position); // 좌표
+			players[i].moveTo(position);
 
 			System.out.println("이동 후 pos : " + player.getPosition());
-			if (position == 0 || position == 6 || position == 12 || position == 18 || position == 3) { // 특수 지역이니?
+			if (position == 0 || position == 6 || position == 12 || position == 18 || position == 3) { 
 				if (position == 0) {
 					message = "월급을 받습니다!";
 					player.plusMoney(10);
@@ -52,6 +52,8 @@ switch (player.playerState) {
 					player.minusMoney(20);
 				}
 				JOptionPane.showMessageDialog(null, message); </code></pre>
+### 출발지
+![월급](https://user-images.githubusercontent.com/61133793/119317799-79966780-bcb3-11eb-99ac-7c67bc1e1e68.PNG)
 
 ### 무인도 (6번째 칸)에 갇혔을 시 해당 메시지 창이 발생 합니다.
  ![image](https://user-images.githubusercontent.com/61133793/119252288-5b166a80-bbe6-11eb-9fcc-62819120b853.png)
@@ -88,10 +90,22 @@ switch (players[turn].playerState) {
 					break;
 				} </code></pre>
 ## 사회복지기금 (12번째 칸)에 도착했을 시 해당 메시지 창이 발생 합니다.
+![12번째](https://user-images.githubusercontent.com/61133793/119318252-080ae900-bcb4-11eb-8776-305c690000bf.PNG)
 
 ## 세금 (18번째 칸)에 도착했을 시 해당 메시지 창이 발생 합니다.
+![18번째칸](https://user-images.githubusercontent.com/61133793/119318403-3a1c4b00-bcb4-11eb-9c3c-7381439c9e93.PNG)
+
+## 통행료 2배
+![통행료2배](https://user-images.githubusercontent.com/61133793/119317944-ae0a2380-bcb3-11eb-9ee9-8ca29f702ae0.PNG)
+
+## 돈이 없을때
+![돈업승ㅁ](https://user-images.githubusercontent.com/61133793/119317900-9a5ebd00-bcb3-11eb-88db-f60ceddfcde2.PNG)
+
+## 파산
+![파산](https://user-images.githubusercontent.com/61133793/119318008-c0845d00-bcb3-11eb-918d-00caacc5b48a.PNG)
 
 ## 최종 순위
+![최종 순위](https://user-images.githubusercontent.com/61133793/119318034-c8dc9800-bcb3-11eb-83b1-18af9b7950f2.PNG)
         
 # 어려웠던 점
 - 좌표값 설정
@@ -100,12 +114,19 @@ switch (players[turn].playerState) {
 - 게임말 이동 
 처음 설계는 게임말이 해당 위치에 곧바로 나오게 했습니다. 
 
+- 플레이어가 땅을 구매했을 때 플레이어 땅이라거 저장 안됨 
+
 - 보유 금액 갱신
-각 플레이어의 금액이 제대로 갱신되지 않고 마지막 플레이어 라벨에만 금액이 변경되었습니다. 두번 형변환 포인트 컴포넌트로 문제 해결
+ 플레이어의 금액이 제대로 갱신되지 않고 마지막 플레이어 라벨에서만  금액이 변경되었습니다. 
 </pre></code> zz </code></pre>
+
+- 플레이어가 구매한다고했을때 돈이 깎이는거 
+
+
 
 
 # 앞으로 개선 해야할 것
+ 통신 써야되니까
 
 # 시연 영상
 
