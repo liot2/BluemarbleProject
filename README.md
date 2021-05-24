@@ -13,10 +13,50 @@
 
 # 프로젝트의 특징 
 ## 초기화면
+
+- Login class 에서 프로젝트를 실행 시키면 인원 수를 띄우는 메시지 창이 나옵니다. 
 ![bluemarblescreenshot](https://user-images.githubusercontent.com/61133793/119252199-df1c2280-bbe5-11eb-8f9e-b4a61e75d280.PNG)
 - 
+## 특수지역
+- 총 4군데의 특수지역이 있고 해당 특수 지역에 도착했을 시 다양한 메시지 창이 발생 합니다.
+<pre><code>
+switch (player.playerState) {
+		case 0: {
+			break;
+		}
+		case 1: {
+			
+			int position = (player.getPosition() + num) % 24;
+			player.setPosition(player.getPosition() + num);
 
-## 무인도에 갇혔을 시 해당 메시지 창이 발생 합니다.
+			players[i].moveTo(position); // 좌표
+
+			System.out.println("이동 후 pos : " + player.getPosition());
+			if (position == 0 || position == 6 || position == 12 || position == 18 || position == 3) { // 특수 지역이니?
+				if (position == 0) {
+					message = "월급을 받습니다!";
+					player.plusMoney(10);
+				}			
+				if (position == 3) {
+					message = "황금올리브";
+					num = (int) ((Math.random() * 6) + 1);						
+				}
+				if (position == 6) {
+					message = "무인도에 갇혔습니다ㅠㅠ \n다음턴은 쉽니다";
+					player.playerState = 0;
+				}
+				if (position == 12) {
+					message = "복권 당첨!! \n(축하금 20만원)";
+					player.plusMoney(20);
+				}
+				if (position == 18) {
+					message = "병원 도착! 건강검진을 받으세요! \n(비용 20만원)";
+					player.minusMoney(20);
+				}
+
+				JOptionPane.showMessageDialog(null, message); </code></pre>
+
+### 무인도 (6번째 칸)에 갇혔을 시 해당 메시지 창이 발생 합니다.
  ![image](https://user-images.githubusercontent.com/61133793/119252288-5b166a80-bbe6-11eb-9fcc-62819120b853.png)
  ![image](https://user-images.githubusercontent.com/61133793/119252762-dd079300-bbe8-11eb-88c2-537869af1c9e.png)
 - playerstate가 0일때 무인도, 1일때 게임 가능을 기준으로 두었습니다.
@@ -50,7 +90,11 @@ switch (players[turn].playerState) {
 					diceStatus = PAUSE;
 					break;
 				} </code></pre>
-##
+## 사회복지기금 (12번째 칸)에 도착했을 시 해당 메시지 창이 발생 합니다.
+
+## 세금 (18번째 칸)에 도착했을 시 해당 메시지 창이 발생 합니다.
+
+## 최종 순위
         
 # 어려웠던 점
 
