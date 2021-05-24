@@ -53,7 +53,7 @@ switch (player.playerState) {
 					message = "병원 도착! 건강검진을 받으세요! \n(비용 20만원)";
 					player.minusMoney(20);
 				}
-				JOptionPane.showMessageDialog(null, message); </code></pre>
+				JOptionPane.showMessageDialog(null, message); <code><pre>
 ### 출발지
 ![월급](https://user-images.githubusercontent.com/61133793/119317799-79966780-bcb3-11eb-99ac-7c67bc1e1e68.PNG)
 
