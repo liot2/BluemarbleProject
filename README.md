@@ -1,8 +1,8 @@
 # 프로젝트 소개
 보드 게임 중 하나인 부루마블을 모티브로 삼었고 이클립스를 활용하여 자바로 제작한 게임입니다.
-플레이어에게 기본 자금을 나눠 주며 게임이 시작됩니다.
+플레이어에게 기본 자금을 나누어 주며 게임이 시작됩니다.
 주사위를 굴려 나온 수 만큼 이동해 땅을 구매할 수 있고 본인이 구매한 땅이 아니라면 통행료를 지불합니다.
-파산이 된 플레이어가 나온다면 게임이 종료됩니다. 
+파산이 된 플레이어가 나온다면 게임이 즉시 종료됩니다. 
 
 # 플로우 차트
 ![bluemarblescreenshot](https://user-images.githubusercontent.com/61133793/119252199-df1c2280-bbe5-11eb-8f9e-b4a61e75d280.PNG)
@@ -13,7 +13,7 @@
 
 # 프로젝트의 특징 
 ## 초기 화면
-- 아이디 입력 창이 나옵니다
+- 프로젝트 실행 시 플레이어의 인원을 정할 수 있는 윈도우 창이 실행됩니다.
 
 
 ## 게임 화면 
@@ -21,9 +21,9 @@
 - 
 
 ## 특수지역
-
 - 총 4군데의 특수 지역이 있으며 해당 특수 지역에 도착했을 때, 지역에 맞는 메시지 창이 발생 합니다.
-<pre><code>switch (player.playerState) {
+```java
+switch (player.playerState) {
 		case 0: {
 			break;
 		}
@@ -52,7 +52,10 @@
 					message = "병원 도착! 건강검진을 받으세요! \n(비용 20만원)";
 					player.minusMoney(20);
 				}
-				JOptionPane.showMessageDialog(null, message); </code></pre>
+				JOptionPane.showMessageDialog(null, message);
+				}
+			}
+```			
 ### 출발지
 ![월급](https://user-images.githubusercontent.com/61133793/119317799-79966780-bcb3-11eb-99ac-7c67bc1e1e68.PNG)
 
@@ -60,7 +63,8 @@
  ![무인도에 갇힘](https://user-images.githubusercontent.com/61133793/119319793-d561f000-bcb5-11eb-9f99-858009bcf872.PNG)
  ![이번판 쉼](https://user-images.githubusercontent.com/61133793/119319832-dd219480-bcb5-11eb-858c-8ff55dc6fdc3.PNG)
 - playerstate가 0일때 무인도, 1일때 게임 가능을 기준으로 두었습니다.
-<pre><code>switch (players[turn].playerState) {
+```java
+switch (players[turn].playerState) {
 			case 0: {
 				JOptionPane.showMessageDialog(dice, "무인도에 갇혔으므로 이번턴은 쉽니다!");
 				players[turn].playerState = 1;
@@ -88,23 +92,35 @@
 
 					diceStatus = PAUSE;
 					break;
-				} </code></pre>
-## 복권 (12번째 칸)에 도착했을 시 해당 메시지 창이 발생 합니다.
+				}
+```
+### 복권 (12번째 칸)에 도착했을 시 해당 메시지 창이 발생 합니다.
 ![12번째](https://user-images.githubusercontent.com/61133793/119318252-080ae900-bcb4-11eb-8776-305c690000bf.PNG)
-## 병원 (18번째 칸)에 도착했을 시 해당 메시지 창이 발생 합니다.
+### 병원 (18번째 칸)에 도착했을 시 해당 메시지 창이 발생 합니다.
 ![18번째칸](https://user-images.githubusercontent.com/61133793/119318403-3a1c4b00-bcb4-11eb-9c3c-7381439c9e93.PNG)
+## 황금열쇠
+
+- 총 10가지의 황금열쇠가 있으며, 황금열쇠 내용에 따라 플레이어에게 다양한 영향을 끼칠 수 있습니다. 
+```java
+asd
+```
+
 ## 통행료 두배
 ![통행료2배](https://user-images.githubusercontent.com/61133793/119317944-ae0a2380-bcb3-11eb-9ee9-8ca29f702ae0.PNG)
-<pre><code> if (Tile.tileList[position].getOwner().equals(player)) { 
+- 본인 소유 토지를 다시 밟았을 때, 통행료 두배를 받을 수 있게 됩니다.  
+```java
+if (Tile.tileList[position].getOwner().equals(player)) { 
 				message = "자신의 땅에 돌아왔습니다! 통행료가 2배가 됩니다!";
 				Tile.tileList[position].toll = Tile.tileList[position].toll * 2;
 				JOptionPane.showMessageDialog(null, message);
-			} </code></pre>
-- 본인 소유 토지를 다시 밟을 때, 통행료를 두배 낼수 있게 했습니다. 
+			} 
+```
 ## 파산과 최종 순위
 ![파산](https://user-images.githubusercontent.com/61133793/119318008-c0845d00-bcb3-11eb-918d-00caacc5b48a.PNG)
 ![최종 순위](https://user-images.githubusercontent.com/61133793/119318034-c8dc9800-bcb3-11eb-83b1-18af9b7950f2.PNG)
-<pre><code>if (player.getMoney() <= 0) {
+- 게임 도중 파산한 플레이어가 나온다면 곧바로 게임이 종료되고 현재 보유 금액이 많은 순서로 순위를 매깁니다. 
+```java
+if (player.getMoney() <= 0) {
 				JOptionPane.showMessageDialog(null, player.getName() + "의 파산! \n게임이 종료되었습니다!");
 				String endGame = "";
 				int max = 0 ;
@@ -124,33 +140,62 @@
 				System.exit(1);
 			}
 		}
-	}</code></pre>
+	}
+```
 ## 자금 부족
 ![돈업승ㅁ](https://user-images.githubusercontent.com/61133793/119317900-9a5ebd00-bcb3-11eb-88db-f60ceddfcde2.PNG)
-<pre><code> if (players[i].getMoney() < Tile.tileList[position].toll) {
-					JOptionPane.showMessageDialog(null, "돈이 부족해서 땅을 구매할 수 없습니다!"); 
-					} </code></pre>
-        
+- 보유 금액이 토지의 금액보다 적다면 땅을 구매할 수 없다는 메시지 창이 나옵니다.
+```java 
+			if (players[i].getMoney() < Tile.tileList[position].toll) {
+				JOptionPane.showMessageDialog(null, "돈이 부족해서 땅을 구매할 수 없습니다!"); 
+				} 
+```
 # 어려웠던 점
-- 좌표값 설정
-땅에 대한 정보가 필요했습니다. 마우스 포인터의 위치를 통해 X값과 Y값을 알아냈고,
-
-- 게임말 이동 
-처음 설계는 게임말이 해당 위치에 곧바로 나오게 했습니다. 
-
-- 플레이어가 땅을 구매했을 때 플레이어 땅이라거 저장 안됨 
-
-- 보유 금액 갱신
- 플레이어의 금액이 제대로 갱신되지 않고 마지막 플레이어 라벨에서만  금액이 변경되었습니다. 
+## 1. 좌표값 설정	
+토지에 대한 정보가 필요했습니다. MouseListener를 사용하여 마우스 커서의 위치에 대한 좌표를 알아낼 수 있었습니다. 이후 많은 토지가 있었기 때문에 배열을 만들어 가독성을 높혔습니다.
+```java	private static TileInfo start = new TileInfo ("출발점", 0, 484, 516, 2);
+	private static TileInfo Taipei = new TileInfo ("타이페이", 1, 400, 516, 4);
+	private static TileInfo Hongkong = new TileInfo ("홍콩", 2, 330, 516, 4);
+	private static TileInfo Bucheon = new TileInfo ("부천", 3, 260, 516, 5);
+	private static TileInfo Manila = new TileInfo ("마닐라", 4, 190, 516, 6);
+	private static TileInfo Singapore = new TileInfo ("싱가포르", 5, 120, 516, 8);
+	private static TileInfo Island = new TileInfo ("무인도", 6, 14, 516, 0);
+	private static TileInfo Tokyo = new TileInfo ("도쿄", 7, 14, 400, 10);
+	private static TileInfo Copenhagen = new TileInfo ("코펜하겐", 8, 14, 330, 12);
+	private static TileInfo Incheon = new TileInfo ("인천", 9, 14, 260, 15);
+	private static TileInfo Zurich = new TileInfo ("취리히", 10, 14, 190, 14);
+	private static TileInfo Prague = new TileInfo ("프라하", 11, 14, 120, 16);
+	private static TileInfo Reward = new TileInfo ("사회복지센터", 12, 21, 14, 0);
+	private static TileInfo Berlin = new TileInfo ("베를린", 13, 120, 14, 18);
+	private static TileInfo Lisbon = new TileInfo ("리스본", 14, 190, 14, 20);
+	private static TileInfo Busan = new TileInfo ("부산", 15, 260, 14, 21);
+	private static TileInfo Madrid = new TileInfo ("마드리드", 16, 330, 14, 22);
+	private static TileInfo Paris = new TileInfo ("파리", 17, 400, 14, 24);
+	private static TileInfo Fine = new TileInfo ("병원", 18, 512, 27, 0);
+	private static TileInfo Rome = new TileInfo ("로마", 19, 512, 120, 26);
+	private static TileInfo London = new TileInfo ("런던", 20, 512, 190, 28);
+	private static TileInfo Newyork = new TileInfo ("뉴욕", 21, 512, 260, 28);
+	private static TileInfo Sinchon = new TileInfo ("신촌", 22, 512, 330, 29);
+	private static TileInfo Seoul = new TileInfo ("서울", 23, 512, 400, 30);
+	
+	static TileInfo[] tileList = {start, Taipei, Hongkong, Bucheon, Manila, Singapore, 
+				      Island, Tokyo, Copenhagen, Incheon, Zurich, Prague, 
+				      Reward, Berlin, Lisbon, Busan, Madrid, Paris, 
+				       Fine, Rome, London, Newyork, Sinchon, Seoul};
+```
+## 2. 게임말 이동 
+처음 설계는 게임말이 해당 위치에 곧바로 나오게 했습니다.  
+## 3. 땅 소유 정보 저장 
+플레이어가 땅을 구매했을 때 플레이어 땅이라거 저장 안됨
+## 4.   
+플레이어가 구매한다고했을때 돈이 깎이는거 
+## 5. 보유 금액 갱신
+ 플레이어의 금액이 제대로 갱신되지 않고 마지막 플레이어 라벨에서만 금액이 변경되었습니다. 
 <pre><code> zz </code></pre>
-
-- 플레이어가 구매한다고했을때 돈이 깎이는거 
-
-
-
 
 # 앞으로 개선 해야할 것
  통신 써야되니까
 
 # 시연 영상
 
+# JAVADOC
