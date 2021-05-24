@@ -53,7 +53,7 @@ switch (player.playerState) {
 					message = "병원 도착! 건강검진을 받으세요! \n(비용 20만원)";
 					player.minusMoney(20);
 				}
-				JOptionPane.showMessageDialog(null, message); <code><pre>
+				JOptionPane.showMessageDialog(null, message); </code></pre>
 ### 출발지
 ![월급](https://user-images.githubusercontent.com/61133793/119317799-79966780-bcb3-11eb-99ac-7c67bc1e1e68.PNG)
 
@@ -90,11 +90,11 @@ switch (players[turn].playerState) {
 
 					diceStatus = PAUSE;
 					break;
-				} <code><pre>
+				} </code></pre>
 ##  (12번째 칸)에 도착했을 시 해당 메시지 창이 발생 합니다.
 ![12번째](https://user-images.githubusercontent.com/61133793/119318252-080ae900-bcb4-11eb-8776-305c690000bf.PNG)
 <pre><code>
-<code><pre>
+</code></pre>
 ## 병원 (18번째 칸)에 도착했을 시 해당 메시지 창이 발생 합니다.
 ![18번째칸](https://user-images.githubusercontent.com/61133793/119318403-3a1c4b00-bcb4-11eb-9c3c-7381439c9e93.PNG)
 
@@ -104,11 +104,11 @@ switch (players[turn].playerState) {
 				message = "자신의 땅에 돌아왔습니다! 통행료가 2배가 됩니다!";
 				Tile.tileList[position].toll = Tile.tileList[position].toll * 2;
 				JOptionPane.showMessageDialog(null, message);
-			} <code><pre>
+			} </code></pre>
 ## 자금 부족
 ![돈업승ㅁ](https://user-images.githubusercontent.com/61133793/119317900-9a5ebd00-bcb3-11eb-88db-f60ceddfcde2.PNG)
 <pre><code> if (players[i].getMoney() < Tile.tileList[position].toll) {
-					JOptionPane.showMessageDialog(null, "돈이 부족해서 땅을 구매할 수 없습니다!"); <code><pre>
+					JOptionPane.showMessageDialog(null, "돈이 부족해서 땅을 구매할 수 없습니다!"); </code></pre>
 
 ## 파산과 최종 순위
 ![파산](https://user-images.githubusercontent.com/61133793/119318008-c0845d00-bcb3-11eb-918d-00caacc5b48a.PNG)
@@ -134,7 +134,7 @@ switch (players[turn].playerState) {
 			}
 		}
 	}
-<code><pre>
+</code></pre>
         
 # 어려웠던 점
 - 좌표값 설정
@@ -147,7 +147,7 @@ switch (players[turn].playerState) {
 
 - 보유 금액 갱신
  플레이어의 금액이 제대로 갱신되지 않고 마지막 플레이어 라벨에서만  금액이 변경되었습니다. 
-<pre><code> zz <code><pre>
+<pre><code> zz </code></pre>
 
 - 플레이어가 구매한다고했을때 돈이 깎이는거 
 
