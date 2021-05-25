@@ -99,10 +99,96 @@ switch (players[turn].playerState) {
 ### 병원 (18번째 칸)에 도착했을 시 해당 메시지 창이 발생 합니다.
 ![18번째칸](https://user-images.githubusercontent.com/61133793/119318403-3a1c4b00-bcb4-11eb-9c3c-7381439c9e93.PNG)
 ## 황금열쇠
-
-- 총 10가지의 황금열쇠가 있으며, 황금열쇠 내용에 따라 플레이어에게 다양한 영향을 끼칠 수 있습니다. 
+- 총 8가지의 황금열쇠가 있으며, 황금열쇠 내용에 따라 플레이어에게 다양한 영향을 끼칠 수 있습니다. 
 ```java
-asd
+if (position == 3 || position == 9 || position == 15 || position == 21) { // 황금 열쇠
+x = (int)((Math.random() * 8) + 1);
+switch (x)
+
+{
+case 1 : message = "황금열쇠입니다. \n용돈을 받습니다!";
+player.plusMoney(20);
+break;
+
+case 2 : message = "황금열쇠입니다. \n벌금을 냅니다!";
+player.minusMoney(10);
+break;
+
+case 3 : message = "황금열쇠입니다. \n출발지으로 이동합니다!";
+player.moveTo(0);
+player.plusMoney(10);
+break;
+
+case 4 : message = "황금열쇠입니다. \n무인도로 이동합니다!";
+player.moveTo(6);
+player.playerState = 0;
+break;
+
+case 5 : message = "황금열쇠입니다. \n복권으로 이동합니다!";
+player.moveTo(12);
+player.setPosition(player.getPosition() + 9);
+player.plusMoney(20);
+break;
+
+case 6 : message = "황금열쇠입니다. \n병원으로 이동합니다!";
+player.moveTo(18);
+player.setPosition(player.getPosition() + 15);
+player.minusMoney(20);
+break;
+
+case 7 : message = "황금열쇠입니다. \n신촌으로 이동합니다!";
+player.setPosition(22);
+player.moveTo(22);
+
+if (Tile.tileList[22].getOwner() == null) { // 땅 살래?
+if (players[i].getMoney() < Tile.tileList[22].toll) {
+JOptionPane.showMessageDialog(null, "돈이 부족해서 땅을 구매할 수 없습니다!");
+} else {
+purchaseWindow = new PurchaseWindow(i, Tile.tileList[22], this);
+}
+} else if (!Tile.tileList[22].getOwner().equals(player)) { // 다른사람 땅이니?
+message = Tile.tileList[22].getOwner().getName() + "의 땅입니다! \n통행료 " + Tile.tileList[22].toll
++ "만원을 지불하세요";
+player.minusMoney(Tile.tileList[22].toll);
+Tile.tileList[22].getOwner().plusMoney(Tile.tileList[22].toll);
+JOptionPane.showMessageDialog(null, message);
+} else if (Tile.tileList[22].getOwner().equals(player)) { // 자신의 땅이니?
+message = "자신의 땅에 돌아왔습니다! 통행료가 2배가 됩니다!";
+Tile.tileList[22].toll = Tile.tileList[22].toll * 2;
+JOptionPane.showMessageDialog(null, message);
+}
+break;
+
+case 8 : message = "황금열쇠입니다. \n뒤로 3칸 이동 합니다!";
+player.setPosition(position - 3);
+player.moveTo(position - 3);
+
+if (position == 0 || position == 6 || position == 12 || position == 18) { // 특수 지역이니?
+if (position == 0) {
+message = "월급을 받습니다!";
+player.plusMoney(10);
+}
+if (position == 6) {
+message = "무인도에 갇혔습니다ㅠㅠ \n다음턴은 쉽니다";
+player.playerState = 0;
+}
+if (position == 12) {
+message = "복권 당첨!! \n(축하금 20만원)";
+player.plusMoney(20);
+}
+if (position == 18) {
+message = "병원 도착! 건강검진을 받으세요! \n(비용 20만원)";
+player.minusMoney(20);
+}
+}
+
+break;
+}
+
+JOptionPane.showMessageDialog(null, message);
+
+}
+
 ```
 
 ## 통행료 두배
