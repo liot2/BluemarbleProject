@@ -95,10 +95,13 @@ switch (players[turn].playerState) {
 				}
 ```
 ### 복권 (12번째 칸)에 도착했을 시 해당 메시지 창이 발생 합니다.
+![복권](https://user-images.githubusercontent.com/61133793/119520186-0a08a100-bdb5-11eb-9015-7762e0d84601.PNG)
 ![12번째](https://user-images.githubusercontent.com/61133793/119318252-080ae900-bcb4-11eb-8776-305c690000bf.PNG)
 ### 병원 (18번째 칸)에 도착했을 시 해당 메시지 창이 발생 합니다.
+![병원](https://user-images.githubusercontent.com/61133793/119520244-15f46300-bdb5-11eb-91d6-c7f6ed09bbad.PNG)
 ![18번째칸](https://user-images.githubusercontent.com/61133793/119318403-3a1c4b00-bcb4-11eb-9c3c-7381439c9e93.PNG)
 ## 황금열쇠
+![황금열쇠](https://user-images.githubusercontent.com/61133793/119520150-ffe6a280-bdb4-11eb-8c94-fe2c0e53bee4.PNG)
 - 총 8가지의 황금열쇠가 있으며, 황금열쇠 내용에 따라 플레이어에게 다양한 영향을 끼칠 수 있습니다. 
 ```java
 if (position == 3 || position == 9 || position == 15 || position == 21) { // 황금 열쇠
