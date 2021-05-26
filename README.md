@@ -273,9 +273,41 @@ if (player.getMoney() <= 0) {
 				       Fine, Rome, London, Newyork, Sinchon, Seoul};
 ```
 ## 2. 게임말 이동 
-처음 설계는 게임말이 해당 위치에 곧바로 나오게 했습니다.  
+처음 설계는 게임말이 해당 위치에 곧바로 나오게 했습니다. 하지만 생동감 있는 게임을 위해 말 이동 애니메이션을 추가 하였습니다.  
 ```java
-asd
+	public void moveTo(int tileNo) {
+		TileInfo tileInfo = Tile.tileList[tileNo];
+		destX = tileInfo.getX();
+		destY = tileInfo.getY();
+
+		final Timer timer = new Timer(0, new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				if (destX == playerX && destY == playerY) {
+					
+					parentMap.showWindow(/*position, i*/);
+					((Timer) e.getSource()).stop();
+				}
+
+				if (playerX < destX) {
+					++playerX;
+				} else {
+					--playerX;
+				}
+
+				if (playerY < destY) {
+					++playerY;
+				} else {
+					--playerY;
+				}
+				setBounds(new Rectangle(playerX, playerY, 40, 40));			
+			}
+		});
+		timer.start();
+	}
+
 ```
 ## 3. 땅 소유 정보 저장 
 플레이어가 땅을 구매했을 때 플레이어 땅이라거 저장 안됨
@@ -290,7 +322,7 @@ asd
 ## 5. 보유 금액 갱신
  플레이어의 금액이 제대로 갱신되지 않고 마지막 플레이어 라벨에서만 금액이 변경되었습니다. 
 ```java
-asd
+asdf
 ```
 # 앞으로 개선 해야할 것
 
