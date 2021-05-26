@@ -273,7 +273,7 @@ if (player.getMoney() <= 0) {
 				       Fine, Rome, London, Newyork, Sinchon, Seoul};
 ```
 ## 2. 게임말 이동 
-처음 설계는 게임말이 해당 위치에 곧바로 나오게 했습니다. 하지만 생동감 있는 게임을 위해 말 이동 애니메이션을 추가 하였습니다.  
+처음 설계는 게임말이 해당 위치에 곧바로 나오게 했습니다. 하지만 생동감 있는 게임을 위해 Timer 클래스를 사용하여, 말 이동이 애니메이션으로 보여지도록 추가 하였습니다.  
 ```java
 	public void moveTo(int tileNo) {
 		TileInfo tileInfo = Tile.tileList[tileNo];
@@ -290,7 +290,7 @@ if (player.getMoney() <= 0) {
 					parentMap.showWindow(/*position, i*/);
 					((Timer) e.getSource()).stop();
 				}
-
+				
 				if (playerX < destX) {
 					++playerX;
 				} else {
@@ -307,24 +307,87 @@ if (player.getMoney() <= 0) {
 		});
 		timer.start();
 	}
-
 ```
 ## 3. 땅 소유 정보 저장 
-플레이어가 땅을 구매했을 때 플레이어 땅이라거 저장 안됨
+플레이어가 토지를 구매했을 때 구매한 내용이 저장되지 않았습니다. Tile 이라는 클래스에 정보가 저장되야 하는데 Tile 클래스에 너무나 많은 내용들이 있어 명확하게 구별하는 것이 힘들었습니다. 그래서 Tileinfo라는 클래스를 따로 만들고 그 안에 땅 소유 정보를 저장하는 메서드를 만들었습니다.
 ```java
-asd
+public class TileInfo {
+	String name;
+	int tNum;
+	int x;
+	int y;
+	int toll;
+	private Player owner = null;
+	
+	public void buy(Player owner) {
+		this.setOwner(owner);
+		owner.setMoney(owner.minusMoney(toll));
+	}
+	
+	TileInfo(String name, int tNum, int x, int y, int toll){
+		this.name = name;
+		this.tNum = tNum;
+		this.x = x;
+		this.y = y;
+		this.toll = toll;
+	}
+	
+	public Player getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Player owner) {
+		this.owner = owner;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int gettNum() {
+		return tNum;
+	}
+
+	public void settNum(int tNum) {
+		this.tNum = tNum;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public int getToll() {
+		return toll;
+	}
+
+	public void setToll(int toll) {
+		this.toll = toll;
+	}
+}
 ```
-## 4.   
-플레이어가 구매한다고했을때 돈이 깎이는거 
-```java
-asd
-```
-## 5. 보유 금액 갱신
+## 4. 보유 금액 갱신  
  플레이어의 금액이 제대로 갱신되지 않고 마지막 플레이어 라벨에서만 금액이 변경되었습니다. 
 ```java
-asdf
+
 ```
 # 앞으로 개선 해야할 것
+
 
 # 시연 영상
 
