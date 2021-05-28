@@ -19,7 +19,7 @@
 
 ## 게임 화면 
 ![게임화면](https://user-images.githubusercontent.com/61133793/119909820-c66a8e80-bf90-11eb-8833-04f0d9f76585.PNG)
-- 
+- 초기 게임 화면
 
 ## 특수지역
 - 총 4군데의 특수 지역이 있으며 해당 특수 지역에 도착했을 때, 지역에 맞는 메시지 창이 발생 합니다.
@@ -72,6 +72,7 @@ switch (players[turn].playerState) {
 				turn = ++turn % 4;
 				break;
 			}
+			
 			case 1: {
 				switch (diceStatus) {
 				case PAUSE:
@@ -103,96 +104,105 @@ switch (players[turn].playerState) {
 ![18번째칸](https://user-images.githubusercontent.com/61133793/119318403-3a1c4b00-bcb4-11eb-9c3c-7381439c9e93.PNG)
 ## 황금열쇠
 ![황금열쇠](https://user-images.githubusercontent.com/61133793/119520150-ffe6a280-bdb4-11eb-8c94-fe2c0e53bee4.PNG)
-- 총 8가지의 황금열쇠가 있으며, 황금열쇠 내용에 따라 플레이어에게 다양한 영향을 끼칠 수 있습니다. 
+- 총 9가지의 황금열쇠가 있으며, 황금열쇠 내용에 따라 플레이어에게 다양한 영향을 끼칠 수 있습니다. 
 ```java
-if (position == 3 || position == 9 || position == 15 || position == 21) { // 황금 열쇠
-x = (int)((Math.random() * 8) + 1);
-switch (x)
+	public boolean goldKey() { 
+		JOptionPane.showMessageDialog(null, "쨔란 황금열쇠 도착! >_<");
+		Player player = players[now];
+		int gold = (int) ((Math.random() * 9) + 1);
+		boolean b = false;
+		switch (gold) {
+		case 1: {
+			message = "황금열쇠입니다. \n용돈 20만원을 받습니다!";
+			players[now].plusMoney(20);
+			b = false;
+			break;
+		}
+		
+		case 2: {
+			message = "황금열쇠입니다. \n속도위반! 벌금을 냅니다! (비용 10만원)";
+			players[now].minusMoney(10);
+			b = false;
+			break;
+		}
+		
+		case 3: {
+			message = "황금열쇠입니다. \n출발지으로 이동합니다!";
+			players[now].moveTo(0);
+			players[now].setPosition(0);
+			break;
+		}
+		
+		case 4: {
+			message = "황금열쇠입니다. \n무인도로 이동합니다!";
+			players[now].moveTo(6);
+			players[now].setPosition(6);
+			break;
+		}
+		
+		case 5: {
+			message = "황금열쇠입니다. \n 복권으로 이동합니다!";
+			players[now].moveTo(12);
+			players[now].setPosition(12);
+			break;
+		}
+		
+		case 6: {
+			message = "황금열쇠입니다. \n병원으로 이동합니다!";
+			players[now].moveTo(18);
+			players[now].setPosition(18);
+			break;
+		}
+		
+		case 7: {
+			message = "신촌으로 이동합니다!";
+			JOptionPane.showMessageDialog(null, message);
+			players[now].setPosition(22);
+			players[now].moveTo(22);		
+			showWindow();
+			break;
+		}
+		
+		case 8: {
+			message = "뒤로 3칸 이동 합니다!";
+			JOptionPane.showMessageDialog(null, message);
+			players[now].setPosition((player.getPosition() - 3) % 24);
+			players[now].moveTo((player.getPosition() - 3) % 24);
+			b = false;
+			break;
+		}
 
-{
-case 1 : message = "황금열쇠입니다. \n용돈을 받습니다!";
-player.plusMoney(20);
-break;
-
-case 2 : message = "황금열쇠입니다. \n벌금을 냅니다!";
-player.minusMoney(10);
-break;
-
-case 3 : message = "황금열쇠입니다. \n출발지으로 이동합니다!";
-player.moveTo(0);
-player.plusMoney(10);
-break;
-
-case 4 : message = "황금열쇠입니다. \n무인도로 이동합니다!";
-player.moveTo(6);
-player.playerState = 0;
-break;
-
-case 5 : message = "황금열쇠입니다. \n복권으로 이동합니다!";
-player.moveTo(12);
-player.setPosition(player.getPosition() + 9);
-player.plusMoney(20);
-break;
-
-case 6 : message = "황금열쇠입니다. \n병원으로 이동합니다!";
-player.moveTo(18);
-player.setPosition(player.getPosition() + 15);
-player.minusMoney(20);
-break;
-
-case 7 : message = "황금열쇠입니다. \n신촌으로 이동합니다!";
-player.setPosition(22);
-player.moveTo(22);
-
-if (Tile.tileList[22].getOwner() == null) { // 땅 살래?
-if (players[i].getMoney() < Tile.tileList[22].toll) {
-JOptionPane.showMessageDialog(null, "돈이 부족해서 땅을 구매할 수 없습니다!");
-} else {
-purchaseWindow = new PurchaseWindow(i, Tile.tileList[22], this);
+		case 9: {
+			message = "황금열쇠입니다. \n생일축하합니다! 다른 플레이어들에게 축하금을 받으세요! (비용 각 5만원)";
+			players[now].plusMoney(5);
+			
+			switch(playersNum) {
+			case 2 : {
+				now = ++now % playersNum;
+				players[now].minusMoney(5);
+			}
+			case 3: {
+				now = ++now % playersNum;
+				players[now].minusMoney(5);
+				now = ++now % playersNum;
+				players[now].minusMoney(5);
+			}
+			case 4 : {
+				now = ++now % playersNum;
+				players[now].minusMoney(5);
+				now = ++now % playersNum;
+				players[now].minusMoney(5);
+				now = ++now % playersNum;
+				players[now].minusMoney(5);
+			}
+			}
+			b = false;
+			break;
+		}
+	}
+		JOptionPane.showMessageDialog(null, message);
+		return b;
 }
-} else if (!Tile.tileList[22].getOwner().equals(player)) { // 다른사람 땅이니?
-message = Tile.tileList[22].getOwner().getName() + "의 땅입니다! \n통행료 " + Tile.tileList[22].toll
-+ "만원을 지불하세요";
-player.minusMoney(Tile.tileList[22].toll);
-Tile.tileList[22].getOwner().plusMoney(Tile.tileList[22].toll);
-JOptionPane.showMessageDialog(null, message);
-} else if (Tile.tileList[22].getOwner().equals(player)) { // 자신의 땅이니?
-message = "자신의 땅에 돌아왔습니다! 통행료가 2배가 됩니다!";
-Tile.tileList[22].toll = Tile.tileList[22].toll * 2;
-JOptionPane.showMessageDialog(null, message);
-}
-break;
-
-case 8 : message = "황금열쇠입니다. \n뒤로 3칸 이동 합니다!";
-player.setPosition(position - 3);
-player.moveTo(position - 3);
-
-if (position == 0 || position == 6 || position == 12 || position == 18) { // 특수 지역이니?
-if (position == 0) {
-message = "월급을 받습니다!";
-player.plusMoney(10);
-}
-if (position == 6) {
-message = "무인도에 갇혔습니다ㅠㅠ \n다음턴은 쉽니다";
-player.playerState = 0;
-}
-if (position == 12) {
-message = "복권 당첨!! \n(축하금 20만원)";
-player.plusMoney(20);
-}
-if (position == 18) {
-message = "병원 도착! 건강검진을 받으세요! \n(비용 20만원)";
-player.minusMoney(20);
-}
-}
-
-break;
-}
-
-JOptionPane.showMessageDialog(null, message);
-
-}
-
 ```
 
 ## 통행료 두배
@@ -242,7 +252,7 @@ if (player.getMoney() <= 0) {
 ```
 # 어려웠던 점
 ## 1. 좌표값 설정	
-토지에 대한 정보가 필요했습니다. MouseListener를 사용하여 마우스 커서의 위치에 대한 좌표를 알아낼 수 있었습니다. 이후 많은 토지가 있었기 때문에 배열을 만들어 가독성을 높혔습니다.
+토지에 대한 정보가 필요했습니다. MouseListener를 사용하여 마우스 커서의 위치에 대한 좌표를 알아낼 수 있었습니다.
 ```java	private static TileInfo start = new TileInfo ("출발점", 0, 484, 516, 2);
 	private static TileInfo Taipei = new TileInfo ("타이페이", 1, 400, 516, 4);
 	private static TileInfo Hongkong = new TileInfo ("홍콩", 2, 330, 516, 4);
@@ -266,12 +276,7 @@ if (player.getMoney() <= 0) {
 	private static TileInfo London = new TileInfo ("런던", 20, 512, 190, 28);
 	private static TileInfo Newyork = new TileInfo ("뉴욕", 21, 512, 260, 28);
 	private static TileInfo Sinchon = new TileInfo ("신촌", 22, 512, 330, 29);
-	private static TileInfo Seoul = new TileInfo ("서울", 23, 512, 400, 30);
-	
-	static TileInfo[] tileList = {start, Taipei, Hongkong, Bucheon, Manila, Singapore, 
-				      Island, Tokyo, Copenhagen, Incheon, Zurich, Prague, 
-				      Reward, Berlin, Lisbon, Busan, Madrid, Paris, 
-				       Fine, Rome, London, Newyork, Sinchon, Seoul};
+	private static TileInfo Seoul = new TileInfo ("서울", 23, 512, 400, 30);	
 ```
 ## 2. 게임말 이동 
 처음 설계는 게임말이 해당 위치에 곧바로 나오게 했습니다. 하지만 생동감 있는 게임을 위해 Timer 클래스를 사용하여, 말 이동이 애니메이션으로 보여지도록 추가 하였습니다.  
@@ -385,7 +390,10 @@ public class TileInfo {
 ## 4. 보유 금액 갱신  
  플레이어의 금액이 제대로 갱신되지 않고 마지막 플레이어 라벨에서만 금액이 변경되었습니다. 
 ```java
-
+public void changeMoney() {
+		for (int k = 0; k < playersNum; ++k) {
+			((JLabel) ((JPanel) infoPanels[k].getComponent(1)).getComponent(1)).setText("보유 금액 : " + players[k].getMoney());}
+	}
 ```
 # 앞으로 개선 해야할 것
 
