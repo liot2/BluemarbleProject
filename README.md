@@ -389,6 +389,7 @@ public class TileInfo {
 ```
 ## 4. 보유 금액 갱신  
  플레이어의 금액이 제대로 갱신되지 않고 마지막 플레이어 라벨에서만 금액이 변경되었습니다. 
+ 라벨값 변경을 위해 컴포넌트 이벤트를 발생시켰고 이벤트를 발생한 컴포넌트를 반환시켰습니다.
 ```java
 public void changeMoney() {
 		for (int k = 0; k < playersNum; ++k) {
