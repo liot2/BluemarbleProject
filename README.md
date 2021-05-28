@@ -13,11 +13,12 @@
 
 # 프로젝트의 특징 
 ## 초기 화면
+![초기화면](https://user-images.githubusercontent.com/61133793/119909803-bbaff980-bf90-11eb-9560-0beb0fcae656.PNG)
 - 프로젝트 실행 시 플레이어의 인원을 정할 수 있는 윈도우 창이 실행됩니다.
 
 
 ## 게임 화면 
-![bluemarblescreenshot](https://user-images.githubusercontent.com/61133793/119252199-df1c2280-bbe5-11eb-8f9e-b4a61e75d280.PNG)
+![게임화면](https://user-images.githubusercontent.com/61133793/119909820-c66a8e80-bf90-11eb-8833-04f0d9f76585.PNG)
 - 
 
 ## 특수지역
@@ -205,8 +206,8 @@ if (Tile.tileList[position].getOwner().equals(player)) {
 			} 
 ```
 ## 파산과 최종 순위
-![파산](https://user-images.githubusercontent.com/61133793/119318008-c0845d00-bcb3-11eb-918d-00caacc5b48a.PNG)
-![최종 순위](https://user-images.githubusercontent.com/61133793/119318034-c8dc9800-bcb3-11eb-83b1-18af9b7950f2.PNG)
+![파삱](https://user-images.githubusercontent.com/61133793/119909976-18abaf80-bf91-11eb-8d2b-b3070efd4fe9.PNG)
+![순위](https://user-images.githubusercontent.com/61133793/119909989-1ea19080-bf91-11eb-8f0f-069534e26347.PNG)
 - 게임 도중 파산한 플레이어가 나온다면 곧바로 게임이 종료되고 현재 보유 금액이 많은 순서로 순위를 매깁니다. 
 ```java
 if (player.getMoney() <= 0) {
