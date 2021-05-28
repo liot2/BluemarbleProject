@@ -5,7 +5,7 @@
 파산이 된 플레이어가 나온다면 게임이 즉시 종료됩니다. 
 
 # 플로우 차트
-![bluemarblescreenshot](https://user-images.githubusercontent.com/61133793/119252199-df1c2280-bbe5-11eb-8f9e-b4a61e75d280.PNG)
+![게임화면](https://user-images.githubusercontent.com/61133793/119909820-c66a8e80-bf90-11eb-8833-04f0d9f76585.PNG)
 
 # 사용된 프로그램 정보
 - JDK 1.8 
